@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import hopslogomob from "../assets/hopslogomob.png";
+import hopslogomob from "../assets/hopslogomob.PNG";
 import hopslogo from "../assets/hopslogo.png";
 
 import {
@@ -215,3 +215,4 @@ setTotalUnread(kk)
 };
 
 export default Navbar;
+
