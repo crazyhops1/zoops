@@ -9,17 +9,17 @@ const otpSend = async (email) => {
 
     try {
         const otp = Math.floor(100000 + Math.random() * 900000)
-                console.log(11)
+
 
         const findUserIdByemail = await userModel.findOne({ email }, { _id: 1, })
-                console.log(findUserIdByemail)
+                  if (findUserIdByemail._id) {
+      await otpverify.deleteMany({ userID: findUserIdByemail._id })
+    }
 
         // delete old  otp
-        await otpverify.deleteMany({ userID: findUserIdByemail._id })
 
     
-        console.log(13)
-
+        
 
       const client = nodemailer.createTransport({
   host: process.env.SMTP_HOST || "smtp.gmail.com",
@@ -30,7 +30,7 @@ const otpSend = async (email) => {
     pass: process.env.EMAIL_PASS, // must be APP PASSWORD, not normal Gmail password
   },
 });
-                console.log(14,client)
+
 
 
      
@@ -44,19 +44,19 @@ const otpSend = async (email) => {
         }
         
         const message = await client.sendMail(writeMessage)
-                console.log(15)
+         
 
-        console.log(message)
+     
         if (!message) {
             return 'somthing to sanding otp'
-        }        console.log(16)
+        }       
 
 
             const newUserOtp = await otpverify.create({ userID: findUserIdByemail._id.toString(), otp })
-                console.log(17)
+
 
         if (!newUserOtp) {
-                    console.log(18)
+
 
             return {
                 success: false,
@@ -80,6 +80,7 @@ const otpSend = async (email) => {
 
 
 export default otpSend
+
 
 
 
