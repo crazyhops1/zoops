@@ -16,15 +16,16 @@ const otpSend = async (email) => {
     
 
 
-        const client = nodemailer.createTransport({
-             host: process.env.SMTP_HOST,
-  port: parseInt(process.env.SMTP_PORT), 
-  secure: parseInt(process.env.SMTP_PORT) === 465, // 
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS
-            }
-        })
+      const client = nodemailer.createTransport({
+  host: process.env.SMTP_HOST || "smtp.gmail.com",
+  port: process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT) : 465,
+  secure: true, // Gmail prefers SSL on port 465
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS, // must be APP PASSWORD, not normal Gmail password
+  },
+});
+
         const writeMessage = {
             to: email,
             subject: "your send by zoops",
@@ -61,4 +62,5 @@ const otpSend = async (email) => {
 
 
 export default otpSend
+
 
