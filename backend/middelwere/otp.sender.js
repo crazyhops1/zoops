@@ -22,9 +22,6 @@ const otpSend = async (email) => {
 
       const client = nodemailer.createTransport({
           service: "gmail",
-  host: process.env.SMTP_HOST || "smtp.gmail.com",
-  port: process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT) : 465,
-  secure: true, // Gmail prefers SSL on port 465
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS, // must be APP PASSWORD, not normal Gmail password
@@ -88,6 +85,7 @@ console.log(newUserOtp)
 
 
 export default otpSend
+
 
 
 
