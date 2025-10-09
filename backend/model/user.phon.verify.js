@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 
 const PhoneVerifyByOtp= new mongoose.Schema({
     userID:{
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref:'User'
     },
     otp:{
@@ -14,4 +14,5 @@ const PhoneVerifyByOtp= new mongoose.Schema({
 
 })
 const otpverify= new mongoose.model('OtpVerify',PhoneVerifyByOtp)
+
 export default  otpverify
