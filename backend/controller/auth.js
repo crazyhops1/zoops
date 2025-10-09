@@ -24,27 +24,21 @@ export const signup = async (request, response) => {
 
     }
     try {
-        console.log(1)
         const chackUserNameIsExist = await userModel.findOne({ username })
-                console.log(2)
 
         const chackUserEmail = await userModel.findOne({ email })
-        console.log(3)
 
         if (chackUserNameIsExist) {
             return response.status(409).json({ message: ' username is already use in other account' })
         }
-                console.log(4)
 
         if (chackUserEmail) {
             return response.status(422).json({ message: 'mobile number  is already use in other account' })
         }
-                console.log(5)
 
 
         const salt = await bcrypt.genSalt(10)
         const hashPassword = await bcrypt.hash(password, salt)
-        console.log(6)
 
 
 
@@ -55,10 +49,8 @@ export const signup = async (request, response) => {
             return response.status(400).json({ message: 'somthing went worng while sanding otp' })
 
         }
-                console.log(7)
 
         const newUser = await userModel.create({ fullName, email, username, password: hashPassword })
-        console.log(8)
 
 
         return response.status(201).json({ message: 'account created but mobile verify is left', id: newUser._id })
@@ -177,6 +169,7 @@ export const logOut = (request, response) => {
 
     return response.status(200).json({ message: "Logged out successfully" });
 };
+
 
 
 
