@@ -67,12 +67,12 @@ export const refrashToken = (request, response) => {
     response.cookie('zoopsrefrash', refrashToken, {
       maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true,
       secure: process.env.ENVIRONMENT === 'production',
-      sameSite: "strict"
+      sameSite: "None"
     })
     response.cookie('zoopsaccess', createToken, {
       maxAge: 1 * 60 * 1000, httpOnly: true,
       secure: process.env.ENVIRONMENT === 'production',
-      sameSite: "strict"
+      sameSite: "None"
     })
 
     return response.status(200).json({ message: 'user login', token: createToken })
@@ -86,3 +86,4 @@ export const refrashToken = (request, response) => {
 
 
 }
+
