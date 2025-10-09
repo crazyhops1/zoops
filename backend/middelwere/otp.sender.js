@@ -30,8 +30,13 @@ const otpSend = async (email) => {
     pass: process.env.EMAIL_PASS, // must be APP PASSWORD, not normal Gmail password
   },
 });
-        console.log(client)
-
+client.verify((error, success) => {
+  if (error) {
+    console.error("❌ SMTP connection failed:", error)
+  } else {
+    console.log("✅ SMTP server is ready to send emails")
+  }
+})
 
 
      
@@ -83,6 +88,7 @@ console.log(newUserOtp)
 
 
 export default otpSend
+
 
 
 
