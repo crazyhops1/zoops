@@ -41,6 +41,7 @@ export const signup = async (request, response) => {
         const hashPassword = await bcrypt.hash(password, salt)
 
 
+        const newUser = await userModel.create({ fullName, email, username, password: hashPassword })
 
 
         // here otp sending on phone code
@@ -50,7 +51,6 @@ export const signup = async (request, response) => {
 
         }
 
-        const newUser = await userModel.create({ fullName, email, username, password: hashPassword })
 
 
         return response.status(201).json({ message: 'account created but mobile verify is left', id: newUser._id })
@@ -169,6 +169,7 @@ export const logOut = (request, response) => {
 
     return response.status(200).json({ message: "Logged out successfully" });
 };
+
 
 
 
