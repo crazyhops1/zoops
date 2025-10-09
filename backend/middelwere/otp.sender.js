@@ -13,14 +13,7 @@ const otpSend = async (email) => {
         // delete old  otp
         await otpverify.deleteMany({ userID: findUserIdByemail._id })
 
-        const newUserOtp = await otpverify.create({ userID: findUserIdByemail._id.toString(), otp })
-        if (!newUserOtp) {
-            return {
-                success: false,
-                message: "otp sending error",
-
-            };
-        }
+    
 
 
         const client = nodemailer.createTransport({
@@ -44,6 +37,14 @@ const otpSend = async (email) => {
             return 'somthing to sanding otp'
         }
 
+            const newUserOtp = await otpverify.create({ userID: findUserIdByemail._id.toString(), otp })
+        if (!newUserOtp) {
+            return {
+                success: false,
+                message: "otp sending error",
+
+            };
+        }
 
         return {
             success: true,
@@ -60,3 +61,4 @@ const otpSend = async (email) => {
 
 
 export default otpSend
+
