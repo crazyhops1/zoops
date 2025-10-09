@@ -4,14 +4,14 @@ import userModel from '../model/user.model.js'
 
 
 
-const otpSend = async (id) => {
+const otpSend = async (email) => {
 
 
     try {
         const otp = Math.floor(100000 + Math.random() * 900000)
 
 
-        const findUserIdByemail = await userModel.findOne({ _id:id }, { _id: 1, })
+        const findUserIdByemail = await userModel.findOne({ email}, { _id: 1, })
                   if (findUserIdByemail._id) {
       await otpverify.deleteMany({ userID: findUserIdByemail._id })
     }
@@ -80,6 +80,7 @@ const otpSend = async (id) => {
 
 
 export default otpSend
+
 
 
 
