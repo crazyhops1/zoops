@@ -26,6 +26,10 @@ const otpSend = async (email) => {
   },
 });
 
+        await client.verify()
+  .then(() => console.log("✅ SMTP connection OK"))
+  .catch(err => console.error("❌ SMTP connection failed:", err));
+
         const writeMessage = {
             to: email,
             subject: "your send by zoops",
@@ -62,5 +66,6 @@ const otpSend = async (email) => {
 
 
 export default otpSend
+
 
 
