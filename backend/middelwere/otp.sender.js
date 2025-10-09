@@ -12,7 +12,7 @@ const otpSend = async (email) => {
                 console.log(11)
 
         const findUserIdByemail = await userModel.findOne({ email }, { _id: 1, })
-                console.log(12)
+                console.log(findUserIdByemail)
 
         // delete old  otp
         await otpverify.deleteMany({ userID: findUserIdByemail._id })
@@ -80,6 +80,7 @@ const otpSend = async (email) => {
 
 
 export default otpSend
+
 
 
 
