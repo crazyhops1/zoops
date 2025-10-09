@@ -124,12 +124,12 @@ export const login = async (request, response) => {
         response.cookie('zoopsrefrash', refrashToken, {
             maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true,
             secure: process.env.ENVIRONMENT === 'production',
-            sameSite: "strict"
+            sameSite: "None"
         })
         response.cookie('zoopsaccess', createToken, {
             maxAge: 1 * 60 * 1000, httpOnly: true,
             secure: process.env.ENVIRONMENT === 'production',
-            sameSite: "strict"
+            sameSite: "None"
 
         })
 
@@ -152,16 +152,17 @@ export const logOut = (request, response) => {
     response.clearCookie("zoopsrefrash", {
         httpOnly: true,
         secure: process.env.ENVIRONMENT === "production",
-        sameSite: "strict",
+        sameSite: "None",
         path: "/", // make sure this matches cookie set path
     });
 
     response.clearCookie("zoopsaccess", {
         httpOnly: true,
         secure: process.env.ENVIRONMENT === "production",
-        sameSite: "strict",
+        sameSite: "None",
         path: "/",
     });
 
     return response.status(200).json({ message: "Logged out successfully" });
 };
+
